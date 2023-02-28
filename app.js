@@ -36,16 +36,20 @@ function tryAgain(input) {
 }
 
 //Play again function
-function playAgain() {
+function playAgain(input) {
   var again = prompt("Would you like to play again? 'Yes' or 'No'");
-  if (again === "Yes") {
-    return guessInt(Math.floor(Math.random() * 100));
+  while (again === "Yes") {
+    guess = prompt("Guess an integer between (inclusive) 1-100 " + userName);
+    guessCount = 0;
+    guessHistory = [];
+    guessInt(input);
+    again = prompt("Would you like to play again? 'Yes' or 'No'");
   }
   return alert("All the fun is over.");
 }
 
 //setting the target number
-let secretNumber = Math.floor(Math.random() * 100);
+var secretNumber = Math.floor(Math.random() * 100);
 
 //Here user is prompted to guess an int b/w 1-100
 const userName = prompt("Enter your name, guesser.");
@@ -54,4 +58,4 @@ var guessCount = 0;
 var guessHistory = [];
 
 guessInt(secretNumber);
-playAgain();
+playAgain(Math.floor(Math.random() * 100));
