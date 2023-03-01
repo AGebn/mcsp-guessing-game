@@ -67,19 +67,19 @@ function recordGuessers(name, number) {
           number - guessers[name]
         } more times than last time.`
       );
-      guessers[name] = number;
-      return guessers;
+      return;
     } else if (guessers[name] === guessCount) {
-      alert(`Congratulations, you tied your best score.`);
+      alert(`Congratulations, you tied your best score ${name}.`);
       return;
     } else {
       alert(
-        `Congratulaitons, you beat your previous record by ${
+        `Congratulaitons ${name}, you beat your previous record by ${
           guessers[name] - number
         }`
       );
+      guessers[name] = number;
+      return guessers;
     }
-    return;
   }
 }
 
