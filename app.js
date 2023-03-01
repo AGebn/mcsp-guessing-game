@@ -22,12 +22,17 @@ function guessInt(randomInt) {
       alert(
         `You guessed right! Good job ${userName}, it only took you ${guessCount} guesses to guess ${guess}. Your other guesses were ${guessHistory}`
       );
+      recordGuessers(userName, guessCount);
+      alert(
+        "Here is the history of guessers (name:attempts)" +
+          JSON.stringify(guessers)
+      );
       return;
     }
   }
 }
 
-// function to get the user to try again
+// function to get the user to guess again
 function tryAgain(input) {
   guessHistory.push(input);
   guess = prompt("Try again killer.");
@@ -37,8 +42,9 @@ function tryAgain(input) {
 
 //Play again function
 function playAgain(input) {
-  var again = prompt("Would you like to play again? 'Yes' or 'No'");
-  while (again === "Yes") {
+  again = prompt("Would you like to play again? 'Yes' or 'No'");
+  while (again.toLowerCase() === "yes") {
+    userName = prompt("Enter your name, guesser.");
     guess = prompt("Guess an integer between (inclusive) 1-100 " + userName);
     guessCount = 0;
     guessHistory = [];
@@ -48,14 +54,29 @@ function playAgain(input) {
   return alert("All the fun is over.");
 }
 
-//setting the target number
-var secretNumber = Math.floor(Math.random() * 100);
+// function to record guessers information
+function recordGuessers(name, number) {
+  // we want to create a key (the username) with the value of the users guesses in the guessers object
+  if (guessers[name] === undefined) {
+    guessers[name] = number;
+    return guessers;
+  } else {
+    //will deliver message about previous guesses
+    return;
+  }
+}
+
+/*setting the target number
+var secretNumber = Math.floor(Math.random() * 100); 
+*/
 
 //Here user is prompted to guess an int b/w 1-100
-const userName = prompt("Enter your name, guesser.");
+var userName = prompt("Enter your name, guesser.");
 var guess = prompt("Guess an integer between (inclusive) 1-100 " + userName);
+//initializing a few of our variables
 var guessCount = 0;
 var guessHistory = [];
+var guessers = {};
 
-guessInt(secretNumber);
+guessInt(Math.floor(Math.random() * 100));
 playAgain(Math.floor(Math.random() * 100));
