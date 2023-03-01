@@ -61,7 +61,24 @@ function recordGuessers(name, number) {
     guessers[name] = number;
     return guessers;
   } else {
-    //will deliver message about previous guesses
+    if (guessers[name] < guessCount) {
+      alert(
+        `Sorry ${name}, you guessed ${
+          number - guessers[name]
+        } more times than last time.`
+      );
+      guessers[name] = number;
+      return guessers;
+    } else if (guessers[name] === guessCount) {
+      alert(`Congratulations, you tied your best score.`);
+      return;
+    } else {
+      alert(
+        `Congratulaitons, you beat your previous record by ${
+          guessers[name] - number
+        }`
+      );
+    }
     return;
   }
 }
